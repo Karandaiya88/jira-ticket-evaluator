@@ -1,0 +1,52 @@
+{
+  "examples": [
+    {
+      "name": "Feature Request — User Auth",
+      "jira": {
+        "id": "PROJ-101",
+        "key": "PROJ-101",
+        "fields": {
+          "summary": "Add JWT-based authentication to the REST API",
+          "issuetype": {"name": "Story"},
+          "priority": {"name": "High"},
+          "description": "Users need to authenticate with the API using JWT tokens. Currently all endpoints are public. We need to secure them with bearer token authentication.\n\nAcceptance Criteria:\n- AC-1: /api/login endpoint accepts email + password and returns a signed JWT\n- AC-2: Protected endpoints return 401 if no valid token is provided\n- AC-3: Token expires after 24 hours\n- AC-4: Passwords must be hashed using bcrypt before storage\n- AC-5: Unit tests must achieve ≥ 80% coverage on auth module",
+          "status": {"name": "In Review"},
+          "labels": ["security", "auth"]
+        }
+      },
+      "sample_pr_url": "https://github.com/example/api-service/pull/42"
+    },
+    {
+      "name": "Bug Fix — Pagination Off-by-One",
+      "jira": {
+        "id": "PROJ-202",
+        "key": "PROJ-202",
+        "fields": {
+          "summary": "Pagination returns duplicate items on page boundary",
+          "issuetype": {"name": "Bug"},
+          "priority": {"name": "Medium"},
+          "description": "Steps to reproduce:\n1. Create 20 items in the database\n2. Fetch page 1 with page_size=10 — returns items 1-10\n3. Fetch page 2 with page_size=10 — returns items 10-19 (item 10 duplicated)\n\nExpected: Page 2 returns items 11-20\nActual: Page 2 returns items 10-19\n\nAcceptance Criteria:\n- AC-1: Page 2 must not contain any items from page 1\n- AC-2: All 20 items are returned across 2 pages with no duplicates\n- AC-3: Edge case: page_size=1 returns exactly 1 unique item per page",
+          "status": {"name": "In Review"},
+          "labels": ["bug", "pagination"]
+        }
+      },
+      "sample_pr_url": "https://github.com/example/api-service/pull/55"
+    },
+    {
+      "name": "Refactor — Remove Deprecated Lodash Usage",
+      "jira": {
+        "id": "PROJ-303",
+        "key": "PROJ-303",
+        "fields": {
+          "summary": "Replace deprecated _.flatten and _.pluck with native JS equivalents",
+          "issuetype": {"name": "Task"},
+          "priority": {"name": "Low"},
+          "description": "Technical debt cleanup. Lodash 4.x removed _.pluck. We should replace all lodash calls in src/utils/ with native Array methods.\n\nAcceptance Criteria:\n- AC-1: No imports of lodash remain in src/utils/\n- AC-2: All tests in tests/utils/ continue to pass\n- AC-3: ESLint reports zero new errors\n- AC-4: Bundle size decreases by ≥ 5kb after tree-shaking",
+          "status": {"name": "In Review"},
+          "labels": ["refactor", "dependencies"]
+        }
+      },
+      "sample_pr_url": "https://github.com/example/frontend-app/pull/78"
+    }
+  ]
+}
